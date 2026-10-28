@@ -168,13 +168,11 @@ if "practice_hints_revealed" not in st.session_state:
 st.markdown(
     """
     <style>
-    /* Main background */
     .stApp {
         background: linear-gradient(135deg, #100d22, #111827);
         color: #f8fafc;
     }
 
-    /* Remove the white header strip */
     [data-testid="stHeader"] {
         background: rgba(16, 13, 34, 0.98);
     }
@@ -183,7 +181,6 @@ st.markdown(
         right: 1rem;
     }
 
-    /* Sidebar */
     [data-testid="stSidebar"] {
         background: #111126;
         border-right: 1px solid #393052;
@@ -193,7 +190,6 @@ st.markdown(
         color: #f1f5f9;
     }
 
-    /* Main content text */
     .stApp h1,
     .stApp h2,
     .stApp h3,
@@ -205,8 +201,6 @@ st.markdown(
         color: #f1f5f9;
     }
 
-    /* Fix Streamlit text areas and inputs.
-       Explicit selectors help override dark-theme defaults. */
     .stApp textarea,
     .stApp input,
     .stApp [data-baseweb="input"] input,
@@ -225,13 +219,11 @@ st.markdown(
         opacity: 1 !important;
     }
 
-    /* Select boxes */
     .stApp [data-baseweb="select"] > div {
         background-color: #ffffff;
         color: #111827;
     }
 
-    /* Buttons */
     .stButton > button {
         background-color: #6d4aff;
         color: #ffffff !important;
@@ -250,7 +242,6 @@ st.markdown(
         border-color: #b2a4ff;
     }
 
-    /* Hero section */
     .hero {
         padding: 25px;
         border-radius: 18px;
@@ -264,7 +255,6 @@ st.markdown(
         color: #ffffff !important;
     }
 
-    /* Quest cards */
     .quest-card {
         padding: 20px;
         border-radius: 16px;
@@ -278,7 +268,6 @@ st.markdown(
         font-size: 14px;
     }
 
-    /* Metrics */
     div[data-testid="stMetric"] {
         background: #1f213e;
         border: 1px solid #393454;
@@ -291,18 +280,15 @@ st.markdown(
         color: #ffffff !important;
     }
 
-    /* Expanders */
     [data-testid="stExpander"] {
         border-color: #393454;
     }
 
-    /* Code display */
     [data-testid="stCode"] {
         border: 1px solid #393454;
         border-radius: 8px;
     }
 
-    /* Alerts */
     [data-testid="stAlert"] p {
         color: inherit;
     }
@@ -391,7 +377,6 @@ def show_test_results(result):
         f"**Result: {result.get('passed', 0)}/"
         f"{result.get('total', 0)} tests passed.**"
     )
-
 
 def render_practice_card(quest):
     """Render a practice challenge without changing saved XP."""
@@ -653,7 +638,10 @@ elif page == "🎯 Coding Quests":
                 )
 
             with col2:
-                st.success("Completed") if completed else st.warning("Available")
+                if completed:
+                    st.success("Completed")
+                else:
+                    st.warning("Available")
 
             if completed:
                 st.success(
@@ -718,7 +706,6 @@ elif page == "🎯 Coding Quests":
 
                     except Exception as exc:
                         st.error(f"Could not run the mission: {exc}")
-
 
 # ============================================================
 # PRACTICE MODE
@@ -809,7 +796,6 @@ elif page == "🤖 AI Code Reviewer":
     if st.button("🔍 Review Code", use_container_width=True):
         if not code.strip():
             st.warning("Please enter some code first.")
-
         else:
             try:
                 result = review_code(code, language)
@@ -820,7 +806,9 @@ elif page == "🤖 AI Code Reviewer":
 
                 elif isinstance(result, dict):
                     for key, value in result.items():
-                        st.markdown(f"**{key.replace('_', ' ').title()}**")
+                        st.markdown(
+                            f"**{key.replace('_', ' ').title()}**"
+                        )
                         st.write(value)
 
                 else:
@@ -851,7 +839,6 @@ elif page == "🏆 Leaderboard":
                 "No leaderboard entries yet. Complete a quest "
                 "to add your score!"
             )
-
         else:
             st.caption("Scores are stored in the local SQLite database.")
 
