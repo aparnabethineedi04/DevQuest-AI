@@ -1,80 +1,76 @@
-
 # DevQuest AI 🚀
 
-An interactive coding practice and developer learning dashboard built with Python and Streamlit.
+DevQuest AI is an interactive coding-practice and developer-learning dashboard built with Python, Streamlit, and SQLite. It brings coding challenges, progress tracking, and local code-review helpers into one application.
 
 ## Features
 
-- Interactive developer dashboard
-- Python coding challenges
-- SQL practice
-- Debugging challenges
-- XP and achievement tracking
-- Leaderboard
-- Python Code Reviewer with syntax error detection, hints, suggested corrections, and rule-based explanations
-- SQLite-based progress storage
+- Interactive dashboard with XP and completion progress
+- Coding quests across Python, SQL, Debugging, Data Structures & Algorithms (DSA), and Web Development
+- Quest levels, hints, starter code, solutions, and explanations
+- Python challenge execution against predefined test cases
+- SQL answer validation
+- HTML, CSS, and JavaScript pattern-based challenge validation
+- Local Python and SQL code-review feedback
+- XP, achievements, accepted/completed quest tracking, and leaderboard
+- SQLite-backed local progress storage
 
-## Tech Stack
+## Tech stack
 
 - Python
 - Streamlit
 - SQLite
+- Python standard library (`ast`, `sqlite3`, `html.parser`, `subprocess`, etc.)
 
-## Project Structure
+## Run locally
 
-- `app.py` - Main Streamlit application
-- `ai_reviewer.py` - Code review functionality
-- `code_runner.py` - Coding challenge execution
-- `storage.py` - Database and progress management
-- `requirements.txt` - Python dependencies
-
-## Installation
-
-1. Clone this repository.
-2. Open the project folder in your terminal.
-3. Create a Python virtual environment:
-
+1. Clone the repository:
    ```bash
-   python -m venv .venv
+   git clone https://github.com/aparnabethineedi04/DevQuest-AI.git
+   cd DevQuest-AI
    ```
 
-4. Activate the environment on Windows:
-
+2. Create and activate a virtual environment (Windows PowerShell):
    ```powershell
-   .venv\Scripts\activate
+   python -m venv .venv
+   .venv\Scripts\Activate.ps1
    ```
 
-5. Install dependencies:
-
+3. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   python -m pip install -r requirements.txt
    ```
 
-6. Start the application:
-
+4. Start the app:
    ```bash
    python -m streamlit run app.py
    ```
 
-7. Open `http://localhost:8501` in your browser.
+5. Open the local URL shown in the terminal (usually `http://localhost:8501`).
 
-## Current Limitations
+## Project structure
 
-- The Code Reviewer uses local syntax checks and rule-based explanations, not a generative AI model.
-- Suggested corrections cover only certain common syntax errors.
-- The reviewer does not execute submitted code or guarantee logical correctness.
-- The coding challenge runner is intended for local development and is not a secure sandbox.
-- Progress is stored locally in SQLite; cloud synchronization is not implemented.
+| File | Purpose |
+|---|---|
+| `app.py` | Main Streamlit interface and application flow |
+| `storage.py` | SQLite progress and leaderboard storage |
+| `code_runner.py` | Runs Python quest solutions against test cases |
+| `ai_reviewer.py` | Local Python/SQL syntax and rule-based review |
+| `sql_checker.py` | SQL quest validation |
+| `sql_quests.py` | SQL quest bank |
+| `additional_quests.py` | Additional Python and debugging quests |
+| `web_dsa_quests.py` | DSA quest bank |
+| `web_dev_quests.py` | HTML, CSS, and JavaScript quest bank |
+| `web_dev_checker.py` | Web Development answer validation |
 
-## Future Improvements
+## Notes and limitations
 
-- Generative AI-powered code suggestions
-- More coding challenges
-- Enhanced performance analytics
-- Cloud deployment
+- The Python and SQL reviewer uses local syntax checks and rule-based feedback; it is not a generative AI model.
+- Web Development validation checks for required HTML/CSS/JavaScript patterns. It does not run JavaScript in a browser.
+- The Python challenge runner executes submitted code in a local subprocess. It is intended for local learning and is **not a secure sandbox**. Do not expose it to untrusted users on a public server without implementing proper isolation and resource limits.
+- Progress is stored in a local SQLite database (`devquest.db`). The database is created automatically when the app starts and is excluded from Git.
+- Cloud synchronization and persistent hosted storage are not included in the current version.
 
 ## Author
 
-Likhitha Sri Aparna Bethineedi
-
+**Likhitha Sri Aparna Bethineedi**  
 Computer Science Graduate | Python Developer | Web Development Enthusiast
